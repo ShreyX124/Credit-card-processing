@@ -1,5 +1,6 @@
 // src/components/Login.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Add this import
 import axios from 'axios';
 
 const Login = ({ login }) => {
@@ -77,13 +78,18 @@ const Login = ({ login }) => {
                 </small>
               </div>
               
-              <button 
-                type="submit" 
-                className="btn btn-primary"
-                disabled={loading}
-              >
-                {loading ? 'Logging in...' : 'Login'}
-              </button>
+              <div className="d-flex justify-content-between align-items-center">
+                <button 
+                  type="submit" 
+                  className="btn btn-primary"
+                  disabled={loading}
+                >
+                  {loading ? 'Logging in...' : 'Login'}
+                </button>
+                <Link to="/register" className="text-muted">
+                  New user? Register here
+                </Link>
+              </div>
             </form>
           </div>
         </div>

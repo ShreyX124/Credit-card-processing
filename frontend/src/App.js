@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/Login';
+import Registration from './components/Registration'; // Add this import
 import CustomerDashboard from './components/CustomerDashboard';
 import MerchantDashboard from './components/MerchantDashboard';
 import Navbar from './components/Navbar';
@@ -16,7 +17,6 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is authenticated on component mount
     const token = localStorage.getItem('token');
     const storedUserType = localStorage.getItem('userType');
     
@@ -66,6 +66,10 @@ function App() {
                 <Login login={login} />
               )
             } 
+          />
+          <Route 
+            path="/register" 
+            element={<Registration login={login} />}
           />
           <Route 
             path="/customer/dashboard" 
