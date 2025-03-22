@@ -27,6 +27,20 @@
 .App-link {
   color: #61dafb;
 }
+/* frontend/src/App.css */
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.table-responsive {
+  margin-top: 20px;
+}
 
 @keyframes App-logo-spin {
   from {

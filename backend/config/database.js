@@ -1,131 +1,108 @@
 // backend/config/database.js
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
-const bcrypt = require('bcrypt');
 
-// Create a database connection
-const db = new sqlite3.Database(
-  path.join(__dirname, '../cc_processing.db'),
-  (err) => {
+const dbPath = path.resolve(__dirname, '../cc_processing.db');
+const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-      console.error('Database connection error:', err);
+        console.error('Error connecting to database:', err);
     } else {
-      console.log('Connected to SQLite database');
+        console.log('Connected to SQLite database');
     }
-  }
-);
+});
 
-// Initialize database and create tables
 const initializeDatabase = () => {
-  db.serialize(() => {
-    // Create users table
-    db.run(`
-      CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL,
-        user_type TEXT NOT NULL,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
-
-    // Create transactions table
-    db.run(`
-      CREATE TABLE IF NOT EXISTS transactions (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER NOT NULL,
-        amount DECIMAL(10,2) NOT NULL,
-        card_number TEXT NOT NULL,
-        card_expiry TEXT NOT NULL,
-        card_cvv TEXT NOT NULL,
-        status TEXT NOT NULL,
-        fraud_flag BOOLEAN DEFAULT 0,
-        merchant_id INTEGER, -- Changed to nullable to avoid issues with existing data
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users (id),
-        FOREIGN KEY (merchant_id) REFERENCES users (id)
-      )
-    `);
-
-    // Insert default users for demo within a transaction
-    const saltRounds = 10;
-    const customerPassword = bcrypt.hashSync('customer123', saltRounds);
-    const merchantPassword = bcrypt.hashSync('merchant123', saltRounds);
-    const adminPassword = bcrypt.hashSync('admin123', saltRounds);
-
-    db.run('BEGIN TRANSACTION', (err) => {
-      if (err) {
-        console.error('Error starting transaction:', err);
-        return;
-      }
-
-      // Insert customer
-      db.get('SELECT * FROM users WHERE username = ?', ['customer@example.com'], (err, row) => {
-        if (err) {
-          console.error('Error checking customer user:', err);
-          db.run('ROLLBACK');
-          return;
-        }
-        if (!row) {
-          db.run(
-            'INSERT INTO users (username, password, user_type) VALUES (?, ?, ?)',
-            ['customer@example.com', customerPassword, 'customer'],
-            (err) => {
-              if (err) console.error('Error inserting customer:', err);
+    console.log('Initializing database...');
+    db.serialize(() => {
+        // Create users table
+        db.run(`
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                password TEXT NOT NULL,
+                user_type TEXT NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        `, (err) => {
+            if (err) {
+                console.error('Error creating users table:', err);
+            } else {
+                console.log('Users table created or already exists');
             }
-          );
-        }
-      });
+        });
 
-      // Insert merchant
-      db.get('SELECT * FROM users WHERE username = ?', ['merchant@example.com'], (err, row) => {
-        if (err) {
-          console.error('Error checking merchant user:', err);
-          db.run('ROLLBACK');
-          return;
-        }
-        if (!row) {
-          db.run(
-            'INSERT INTO users (username, password, user_type) VALUES (?, ?, ?)',
-            ['merchant@example.com', merchantPassword, 'merchant'],
-            (err) => {
-              if (err) console.error('Error inserting merchant:', err);
+        // Create transactions table
+        db.run(`
+            CREATE TABLE IF NOT EXISTS transactions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                merchant_id INTEGER,
+                amount REAL NOT NULL,
+                status TEXT NOT NULL,
+                fraud_flag BOOLEAN DEFAULT 0,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id),
+                FOREIGN KEY (merchant_id) REFERENCES users(id)
+            )
+        `, (err) => {
+            if (err) {
+                console.error('Error creating transactions table:', err);
+            } else {
+                console.log('Transactions table created or already exists');
             }
-          );
-        }
-      });
+        });
 
-      // Insert admin
-      db.get('SELECT * FROM users WHERE username = ?', ['admin@example.com'], (err, row) => {
-        if (err) {
-          console.error('Error checking admin user:', err);
-          db.run('ROLLBACK');
-          return;
-        }
-        if (!row) {
-          db.run(
-            'INSERT INTO users (username, password, user_type) VALUES (?, ?, ?)',
-            ['admin@example.com', adminPassword, 'admin'],
-            (err) => {
-              if (err) console.error('Error inserting admin:', err);
+        // Insert default users (for testing)
+        db.get('SELECT COUNT(*) as count FROM users', (err, row) => {
+            if (err) {
+                console.error('Error checking users table:', err);
+                return;
             }
-          );
-        }
-      });
+            if (row.count === 0) {
+                const bcrypt = require('bcrypt');
+                const saltRounds = 10;
 
-      db.run('COMMIT', (err) => {
-        if (err) {
-          console.error('Error committing transaction:', err);
-          db.run('ROLLBACK');
-        } else {
-          console.log('Demo users initialized successfully');
-        }
-      });
+                // Hash passwords for default users
+                bcrypt.hash('customer123', saltRounds, (err, hash) => {
+                    if (err) {
+                        console.error('Error hashing customer password:', err);
+                        return;
+                    }
+                    db.run(
+                        'INSERT INTO users (username, password, user_type) VALUES (?, ?, ?)',
+                        ['customer@example.com', hash, 'customer'],
+                        (err) => {
+                            if (err) {
+                                console.error('Error inserting customer:', err);
+                            } else {
+                                console.log('Default customer inserted');
+                            }
+                        }
+                    );
+                });
+
+                bcrypt.hash('merchant123', saltRounds, (err, hash) => {
+                    if (err) {
+                        console.error('Error hashing merchant password:', err);
+                        return;
+                    }
+                    db.run(
+                        'INSERT INTO users (username, password, user_type) VALUES (?, ?, ?)',
+                        ['merchant@example.com', hash, 'merchant'],
+                        (err) => {
+                            if (err) {
+                                console.error('Error inserting merchant:', err);
+                            } else {
+                                console.log('Default merchant inserted');
+                            }
+                        }
+                    );
+                });
+            } else {
+                console.log('Default users already exist');
+            }
+        });
     });
-  });
 };
 
-module.exports = {
-  db,
-  initializeDatabase
-};
+module.exports = { db, initializeDatabase };
