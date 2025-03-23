@@ -1,12 +1,17 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom'; // Added useLocation
+import { Link, useLocation } from 'react-router-dom';
 import { FaBars, FaTachometerAlt, FaCreditCard, FaHistory, FaUser, FaSignOutAlt } from 'react-icons/fa';
 
-const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleSidebar, isSidebarOpen }) => {
+const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleSidebar, isSidebarOpen, setIsSidebarOpen }) => {
     const location = useLocation(); // Get the current route
 
     // Helper function to determine if a link is active
     const isActive = (path) => location.pathname === path;
+
+    // Handler to collapse the sidebar after navigation
+    const handleNavClick = () => {
+        setIsSidebarOpen(false); // Collapse the sidebar
+    };
 
     return (
         <>
@@ -24,7 +29,7 @@ const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleS
                                 <Link
                                     className={`nav-link ${isActive(userType === 'customer' ? '/customer/dashboard' : '/merchant/dashboard') ? 'active' : ''}`}
                                     to={userType === 'customer' ? '/customer/dashboard' : '/merchant/dashboard'}
-                                    onClick={toggleSidebar}
+                                    onClick={handleNavClick} // Collapse sidebar on click
                                 >
                                     <FaTachometerAlt className="nav-icon" />
                                     <span className="nav-text">Dashboard</span>
@@ -36,7 +41,7 @@ const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleS
                                     <Link
                                         className={`nav-link ${isActive('/payment') ? 'active' : ''}`}
                                         to="/payment"
-                                        onClick={toggleSidebar}
+                                        onClick={handleNavClick} // Collapse sidebar on click
                                     >
                                         <FaCreditCard className="nav-icon" />
                                         <span className="nav-text">Make Payment</span>
@@ -48,7 +53,7 @@ const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleS
                                 <Link
                                     className={`nav-link ${isActive('/transactions') ? 'active' : ''}`}
                                     to="/transactions"
-                                    onClick={toggleSidebar}
+                                    onClick={handleNavClick} // Collapse sidebar on click
                                 >
                                     <FaHistory className="nav-icon" />
                                     <span className="nav-text">Transactions</span>
@@ -59,7 +64,7 @@ const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleS
                                 <Link
                                     className={`nav-link ${isActive('/profile') ? 'active' : ''}`}
                                     to="/profile"
-                                    onClick={toggleSidebar}
+                                    onClick={handleNavClick} // Collapse sidebar on click
                                 >
                                     <FaUser className="nav-icon" />
                                     <span className="nav-text">Profile</span>
@@ -71,7 +76,7 @@ const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleS
                                     className="nav-link btn btn-link"
                                     onClick={() => {
                                         logout();
-                                        toggleSidebar();
+                                        handleNavClick(); // Collapse sidebar on logout
                                     }}
                                 >
                                     <FaSignOutAlt className="nav-icon" />

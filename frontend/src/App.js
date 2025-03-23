@@ -80,6 +80,7 @@ function App() {
                     toggleTheme={toggleTheme}
                     toggleSidebar={toggleSidebar}
                     isSidebarOpen={isSidebarOpen}
+                    setIsSidebarOpen={setIsSidebarOpen} // Pass setIsSidebarOpen to Navbar
                 />
                 <div className="main-content">
                     <div className="container mt-4">
