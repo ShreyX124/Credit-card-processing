@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,6 +17,7 @@ function App() {
     const [userType, setUserType] = useState(null);
     const [loading, setLoading] = useState(true);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark'); // Default to dark mode
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for sidebar toggle
 
     useEffect(() => {
         // Check if user is authenticated on component mount
@@ -60,104 +60,115 @@ function App() {
         setTheme(theme === 'light' ? 'dark' : 'light');
     };
 
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
     if (loading) {
         return <div className="container mt-5 text-center">Loading...</div>;
     }
 
     return (
         <Router>
-            <Navbar
-                isAuthenticated={isAuthenticated}
-                userType={userType}
-                logout={logout}
-                theme={theme}
-                toggleTheme={toggleTheme}
-            />
-            <div className="container mt-4">
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            isAuthenticated ? (
-                                userType === 'customer' ? (
-                                    <Navigate to="/customer/dashboard" />
-                                ) : (
-                                    <Navigate to="/merchant/dashboard" />
-                                )
-                            ) : (
-                                <Login login={login} />
-                            )
-                        }
-                    />
-                    <Route
-                        path="/register"
-                        element={
-                            isAuthenticated ? (
-                                <Navigate to={userType === 'customer' ? '/customer/dashboard' : '/merchant/dashboard'} />
-                            ) : (
-                                <Registration login={login} />
-                            )
-                        }
-                    />
-                    <Route
-                        path="/customer/dashboard"
-                        element={
-                            <ProtectedRoute
-                                isAuthenticated={isAuthenticated}
-                                userType={userType}
-                                requiredUserType="customer"
-                            >
-                                <CustomerDashboard />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/merchant/dashboard"
-                        element={
-                            <ProtectedRoute
-                                isAuthenticated={isAuthenticated}
-                                userType={userType}
-                                requiredUserType="merchant"
-                            >
-                                <MerchantDashboard />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/payment"
-                        element={
-                            <ProtectedRoute
-                                isAuthenticated={isAuthenticated}
-                                userType={userType}
-                                requiredUserType="customer"
-                            >
-                                <PaymentForm />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/transactions"
-                        element={
-                            <ProtectedRoute
-                                isAuthenticated={isAuthenticated}
-                                userType={userType}
-                            >
-                                <TransactionHistory />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/profile"
-                        element={
-                            <ProtectedRoute
-                                isAuthenticated={isAuthenticated}
-                                userType={userType}
-                            >
-                                <Profile />
-                            </ProtectedRoute>
-                        }
-                    />
-                </Routes>
+            <div className={`app-wrapper ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+                {/* Sidebar will be rendered by Navbar */}
+                <Navbar
+                    isAuthenticated={isAuthenticated}
+                    userType={userType}
+                    logout={logout}
+                    theme={theme}
+                    toggleTheme={toggleTheme}
+                    toggleSidebar={toggleSidebar}
+                    isSidebarOpen={isSidebarOpen}
+                />
+                <div className="main-content">
+                    <div className="container mt-4">
+                        <Routes>
+                            <Route
+                                path="/"
+                                element={
+                                    isAuthenticated ? (
+                                        userType === 'customer' ? (
+                                            <Navigate to="/customer/dashboard" />
+                                        ) : (
+                                            <Navigate to="/merchant/dashboard" />
+                                        )
+                                    ) : (
+                                        <Login login={login} />
+                                    )
+                                }
+                            />
+                            <Route
+                                path="/register"
+                                element={
+                                    isAuthenticated ? (
+                                        <Navigate to={userType === 'customer' ? '/customer/dashboard' : '/merchant/dashboard'} />
+                                    ) : (
+                                        <Registration login={login} />
+                                    )
+                                }
+                            />
+                            <Route
+                                path="/customer/dashboard"
+                                element={
+                                    <ProtectedRoute
+                                        isAuthenticated={isAuthenticated}
+                                        userType={userType}
+                                        requiredUserType="customer"
+                                    >
+                                        <CustomerDashboard />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/merchant/dashboard"
+                                element={
+                                    <ProtectedRoute
+                                        isAuthenticated={isAuthenticated}
+                                        userType={userType}
+                                        requiredUserType="merchant"
+                                    >
+                                        <MerchantDashboard />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/payment"
+                                element={
+                                    <ProtectedRoute
+                                        isAuthenticated={isAuthenticated}
+                                        userType={userType}
+                                        requiredUserType="customer"
+                                    >
+                                        <PaymentForm />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/transactions"
+                                element={
+                                    <ProtectedRoute
+                                        isAuthenticated={isAuthenticated}
+                                        userType={userType}
+                                    >
+                                        <TransactionHistory />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/profile"
+                                element={
+                                    <ProtectedRoute
+                                        isAuthenticated={isAuthenticated}
+                                        userType={userType}
+                                    >
+                                        <Profile />
+                                    </ProtectedRoute>
+                                }
+                            />
+                        </Routes>
+                    </div>
+                </div>
             </div>
         </Router>
     );

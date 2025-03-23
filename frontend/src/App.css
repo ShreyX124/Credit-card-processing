@@ -8,6 +8,131 @@ body {
   transition: all 0.3s ease;
 }
 
+/* App Wrapper */
+.app-wrapper {
+  display: flex;
+  flex-direction: column; /* Stack navbar and main content vertically */
+  min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 60px; /* Collapsed width (just enough for icons) */
+  background: #1e293b; /* Match the dark mode card background */
+  position: fixed;
+  top: 0;
+  left: 0; /* Always visible, starting at the left edge */
+  height: 100%;
+  overflow-y: auto;
+  transition: width 0.3s ease; /* Animate width instead of left */
+  z-index: 1000; /* Ensure it’s above other content */
+}
+
+/* Expanded state */
+.sidebar.sidebar-open {
+  width: 300px; /* Larger width when open */
+}
+
+/* Show sidebar on hover */
+.sidebar:hover {
+  width: 300px; /* Expand on hover */
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle-btn {
+  background: #1e293b; /* Match sidebar background */
+  border: none;
+  color: #e2e8f0;
+  font-size: 1.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 0; /* Positioned on the right edge of the sidebar */
+  border-radius: 0 0.5rem 0.5rem 0; /* Rounded on the right side */
+  transition: background 0.3s ease;
+}
+
+:where(.light-mode) .sidebar-toggle-btn {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.sidebar-toggle-btn:hover {
+  background: #374151;
+}
+
+:where(.light-mode) .sidebar-toggle-btn:hover {
+  background: #e0e7ff;
+}
+
+/* Sidebar Content */
+.sidebar-content {
+  padding: 4rem 0.5rem 2rem 0.5rem; /* Adjusted padding for collapsed state */
+  color: #e2e8f0;
+}
+
+.sidebar .nav-link {
+  color: #e2e8f0 !important;
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.sidebar .nav-link:hover {
+  background: #374151;
+  color: #ffffff !important;
+}
+
+/* Navigation Icons */
+.nav-icon {
+  margin-right: 0.75rem;
+  font-size: 1.2rem;
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+/* Navigation Text */
+.nav-text {
+  display: none; /* Hidden in collapsed state */
+}
+
+.sidebar.sidebar-open .nav-text,
+.sidebar:hover .nav-text {
+  display: inline; /* Show text when expanded */
+}
+
+:where(.light-mode) .sidebar {
+  background: #f1f5f9;
+}
+
+:where(.light-mode) .sidebar .nav-link {
+  color: #0f172a !important;
+}
+
+:where(.light-mode) .sidebar .nav-link:hover {
+  background: #e0e7ff;
+  color: #1e293b !important;
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Add a subtle shadow to the sidebar */
+.sidebar {
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure the sidebar content is aligned properly */
+.sidebar .nav-item {
+  margin-bottom: 0.5rem;
+}
+
 /* Dark Mode Styles */
 :where(.dark-mode) {
   background: #000000 !important; /* Solid black background */
