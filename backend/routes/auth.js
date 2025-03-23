@@ -11,7 +11,7 @@ const router = express.Router();
 // @desc    Register a new user
 // @access  Public
 router.post('/register', async (req, res) => {
-    console.log('Register endpoint called with:', req.body); // Add logging
+    console.log('Register endpoint called with:', req.body);
     const { username, password, userType } = req.body;
 
     if (!username || !password || !userType) {
@@ -155,13 +155,16 @@ router.post('/login', (req, res) => {
 router.get('/profile', authenticate, (req, res) => {
     const userId = req.user.id;
     const userType = req.user.userType;
+    console.log('Fetching profile for user:', { userId, userType });
 
     // Fetch user data
     db.get('SELECT id, username, user_type FROM users WHERE id = ?', [userId], (err, user) => {
         if (err) {
+            console.error('Database error fetching user:', err);
             return res.status(500).json({ msg: 'Database error' });
         }
         if (!user) {
+            console.log('User not found:', userId);
             return res.status(404).json({ msg: 'User not found' });
         }
 
@@ -172,11 +175,14 @@ router.get('/profile', authenticate, (req, res) => {
         } else {
             query = 'SELECT * FROM transactions WHERE user_id = ?';
         }
+        console.log('Executing query:', query, 'with userId:', userId);
 
         db.all(query, [userId], (err, transactions) => {
             if (err) {
+                console.error('Database error fetching transactions:', err);
                 return res.status(500).json({ msg: 'Database error' });
             }
+            console.log('Transactions fetched:', transactions);
             res.json({ user, transactions });
         });
     });

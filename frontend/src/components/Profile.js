@@ -1,6 +1,7 @@
 // frontend/src/components/Profile.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../config'; // Add this import
 
 const Profile = () => {
     const [userData, setUserData] = useState(null);
@@ -17,12 +18,12 @@ const Profile = () => {
                     throw new Error('No token found in localStorage');
                 }
 
-                const response = await axios.get('http://localhost:5000/api/auth/profile', { // Changed port to 5000
+                const response = await axios.get(`${API_BASE_URL}/api/auth/profile`, {
                     headers: { 'x-auth-token': token }
                 });
                 console.log('API Response:', response.data);
                 setUserData(response.data.user);
-                setTransactions(response.data.transactions);
+                setTransactions(response.data.transactions || []); // Ensure transactions is an array
             } catch (error) {
                 console.error('Error fetching profile:', error);
                 setError(error.message || 'Failed to fetch profile data');
