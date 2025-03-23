@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import Login from './components/Login';
 import CustomerDashboard from './components/CustomerDashboard';
 import MerchantDashboard from './components/MerchantDashboard';
@@ -16,6 +17,7 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userType, setUserType] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark'); // Default to dark mode
 
     useEffect(() => {
         // Check if user is authenticated on component mount
@@ -30,8 +32,15 @@ function App() {
         setLoading(false);
     }, []);
 
+    useEffect(() => {
+        // Apply the theme class to the body element
+        document.body.className = theme === 'light' ? 'light-mode' : 'dark-mode';
+        // Persist the theme in localStorage
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
     const login = (token, user) => {
-        console.log('Login called with:', { token, user }); // Add logging
+        console.log('Login called with:', { token, user });
         localStorage.setItem('token', token);
         localStorage.setItem('userType', user.userType);
         localStorage.setItem('username', user.username);
@@ -47,13 +56,23 @@ function App() {
         setUserType(null);
     };
 
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+    };
+
     if (loading) {
         return <div className="container mt-5 text-center">Loading...</div>;
     }
 
     return (
         <Router>
-            <Navbar isAuthenticated={isAuthenticated} userType={userType} logout={logout} />
+            <Navbar
+                isAuthenticated={isAuthenticated}
+                userType={userType}
+                logout={logout}
+                theme={theme}
+                toggleTheme={toggleTheme}
+            />
             <div className="container mt-4">
                 <Routes>
                     <Route

@@ -1,3 +1,539 @@
+/* frontend/src/App.css */
+
+/* Reset some default styles and apply global styles */
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Dark Mode Styles */
+:where(.dark-mode) {
+  background: linear-gradient(135deg, #1e3a8a, #6b21a8, #1f2937);
+  color: #ffffff;
+}
+
+:where(.dark-mode) .navbar {
+  background: #1f2937;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+:where(.dark-mode) .navbar-brand {
+  color: #ffffff !important;
+}
+
+:where(.dark-mode) .navbar-nav .nav-link {
+  color: #ffffff !important;
+}
+
+:where(.dark-mode) .navbar-nav .nav-link:hover {
+  background-color: #374151;
+  color: #ffffff !important;
+}
+
+:where(.dark-mode) .navbar-nav .nav-item.active .nav-link {
+  background-color: #9333ea;
+  color: #ffffff !important;
+}
+
+:where(.dark-mode) .jumbotron {
+  background: #1f2937 !important;
+  color: #ffffff;
+}
+
+:where(.dark-mode) .jumbotron .display-4 {
+  color: #d8b4fe !important;
+}
+
+:where(.dark-mode) .jumbotron .lead {
+  color: #9ca3af !important;
+}
+
+:where(.dark-mode) .jumbotron p {
+  color: #9ca3af !important;
+}
+
+:where(.dark-mode) .jumbotron hr {
+  border-color: #4b5563;
+}
+
+:where(.dark-mode) .card {
+  background: #1f2937;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  animation: slideUp 0.8s ease-out;
+}
+
+:where(.dark-mode) .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+}
+
+:where(.dark-mode) .card-header {
+  background: #9333ea;
+  color: #ffffff;
+}
+
+:where(.dark-mode) .card-title {
+  color: #d8b4fe !important;
+}
+
+:where(.dark-mode) .card-text {
+  color: #9ca3af !important;
+}
+
+:where(.dark-mode) .form-group label, /* Increase specificity */
+:where(.dark-mode) .form-label {
+  color: #d1d5db !important;
+}
+
+:where(.dark-mode) label { /* Fallback for any label */
+  color: #d1d5db !important;
+}
+
+:where(.dark-mode) .form-control {
+  background: #374151;
+  color: #ffffff !important;
+  border: 1px solid #4b5563;
+}
+
+:where(.dark-mode) .form-control::placeholder {
+  color: #9ca3af !important;
+  opacity: 1;
+}
+
+:where(.dark-mode) .form-text {
+  color: #9ca3af !important;
+}
+
+:where(.dark-mode) .text-muted {
+  color: #d1d5db !important;
+}
+
+:where(.dark-mode) .text-muted:hover {
+  color: #ffffff !important;
+}
+
+:where(.dark-mode) h1,
+:where(.dark-mode) h2,
+:where(.dark-mode) h3,
+:where(.dark-mode) h4,
+:where(.dark-mode) h5,
+:where(.dark-mode) h6 {
+  color: #d8b4fe;
+}
+
+:where(.dark-mode) p {
+  color: #9ca3af;
+}
+
+:where(.dark-mode) .table {
+  background: #1f2937;
+  color: #d1d5db;
+}
+
+:where(.dark-mode) .table thead th {
+  background: #374151;
+  color: #d8b4fe;
+}
+
+/* Light Mode Styles */
+:where(.light-mode) {
+  background: linear-gradient(135deg, #e0e7ff, #f3e8ff, #ffffff);
+  color: #1f2937;
+}
+
+:where(.light-mode) .navbar {
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+:where(.light-mode) .navbar-brand {
+  color: #1f2937 !important;
+}
+
+:where(.light-mode) .navbar-nav .nav-link {
+  color: #1f2937 !important;
+}
+
+:where(.light-mode) .navbar-nav .nav-link:hover {
+  background-color: #e0e7ff;
+  color: #1f2937 !important;
+}
+
+:where(.light-mode) .navbar-nav .nav-item.active .nav-link {
+  background-color: #9333ea;
+  color: #ffffff !important;
+}
+
+:where(.light-mode) .jumbotron {
+  background: #f8f9fa !important;
+  color: #1f2937;
+}
+
+:where(.light-mode) .jumbotron .display-4 {
+  color: #9333ea !important;
+}
+
+:where(.light-mode) .jumbotron .lead {
+  color: #4b5563 !important;
+}
+
+:where(.light-mode) .jumbotron p {
+  color: #4b5563 !important;
+}
+
+:where(.light-mode) .jumbotron hr {
+  border-color: #d1d5db;
+}
+
+:where(.light-mode) .card {
+  background: #ffffff;
+  border: 1px solid #e0e7ff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  animation: slideUp 0.8s ease-out;
+}
+
+:where(.light-mode) .card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+}
+
+:where(.light-mode) .card-header {
+  background: #9333ea;
+  color: #ffffff;
+}
+
+:where(.light-mode) .card-title {
+  color: #9333ea !important;
+}
+
+:where(.light-mode) .card-text {
+  color: #4b5563 !important;
+}
+
+:where(.light-mode) .form-label {
+  color: #1f2937 !important;
+}
+
+:where(.light-mode) .form-control {
+  background: #f3f4f6;
+  color: #1f2937;
+  border: 1px solid #d1d5db;
+}
+
+:where(.light-mode) .form-control::placeholder {
+  color: #6b7280 !important;
+  opacity: 1;
+}
+
+:where(.light-mode) .form-text {
+  color: #6b7280 !important;
+}
+
+:where(.light-mode) .text-muted {
+  color: #6b7280 !important;
+}
+
+:where(.light-mode) .text-muted:hover {
+  color: #1f2937 !important;
+}
+
+:where(.light-mode) h1,
+:where(.light-mode) h2,
+:where(.light-mode) h3,
+:where(.light-mode) h4,
+:where(.light-mode) h5,
+:where(.light-mode) h6 {
+  color: #9333ea;
+}
+
+:where(.light-mode) p {
+  color: #4b5563;
+}
+
+:where(.light-mode) .table {
+  background: #ffffff;
+  color: #1f2937;
+}
+
+:where(.light-mode) .table thead th {
+  background: #f3f4f6;
+  color: #9333ea;
+}
+
+/* Override Bootstrap container for padding and centering */
+.container {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Style the Navbar (override Bootstrap styles) */
+.navbar {
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.navbar-nav .nav-link {
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+/* Style cards (used in PaymentForm, Profile, etc.) */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card-header {
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-bottom: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+/* Style form elements */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #9333ea;
+  box-shadow: 0 0 8px rgba(147, 51, 234, 0.5);
+  transform: scale(1.01);
+}
+
+/* Style invalid feedback (Bootstrap validation messages) */
+.invalid-feedback {
+  font-size: 0.875rem;
+  color: #ef4444;
+}
+
+/* Style buttons */
+.btn-primary {
+  background: #9333ea;
+  border: none;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #a855f7;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+}
+
+.btn-info {
+  background: #10b981;
+  border: none;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-info:hover {
+  background: #34d399;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+/* Style alerts (used in PaymentForm for success/error messages) */
+.alert {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.alert-success {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.alert-danger {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+/* Style tables (used in TransactionHistory) */
+.table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.table thead th {
+  font-weight: 600;
+  border: none;
+}
+
+.table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+  transform: scale(1.01);
+}
+
+.table td, .table th {
+  padding: 1rem;
+  border: none;
+}
+
+/* Style profile container (used in Profile component) */
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Style text elements (e.g., in CustomerDashboard, MerchantDashboard) */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+p {
+  transition: color 0.3s ease;
+}
+
+/* Style small text (e.g., form hints) */
+.form-text {
+  transition: color 0.3s ease;
+}
+
+/* Style muted text (used in links like "New user? Register here") */
+.text-muted {
+  transition: color 0.3s ease;
+}
+
+/* Theme Toggle Switch Styles */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #9333ea;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Icons inside the slider */
+.icon-dark,
+.icon-light {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+}
+
+.icon-dark {
+  left: 8px;
+  color: #ffffff;
+}
+
+.icon-light {
+  right: 8px;
+  color: #1f2937;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Remove or comment out unused styles from the original App.css */
 .App {
   text-align: center;
 }
@@ -26,20 +562,6 @@
 
 .App-link {
   color: #61dafb;
-}
-/* frontend/src/App.css */
-.profile-container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.card {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.table-responsive {
-  margin-top: 20px;
 }
 
 @keyframes App-logo-spin {
