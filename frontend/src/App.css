@@ -58,7 +58,7 @@ body {
   justify-content: center;
 }
 
-:where(.light-mode) .sidebar-toggle-btn {
+.light-mode .sidebar-toggle-btn {
   background: #f1f5f9;
   color: #0f172a;
 }
@@ -67,7 +67,7 @@ body {
   background: #374151;
 }
 
-:where(.light-mode) .sidebar-toggle-btn:hover {
+.light-mode .sidebar-toggle-btn:hover {
   background: #e0e7ff;
 }
 
@@ -104,7 +104,7 @@ body {
   color: #ffffff !important;
 }
 
-:where(.light-mode) .sidebar .nav-link.active {
+.light-mode .sidebar .nav-link.active {
   background: #f97316; /* Highlight color in light mode */
   color: #ffffff !important;
 }
@@ -131,15 +131,15 @@ body {
   display: inline; /* Show text when expanded */
 }
 
-:where(.light-mode) .sidebar {
+.light-mode .sidebar {
   background: #f1f5f9;
 }
 
-:where(.light-mode) .sidebar .nav-link {
+.light-mode .sidebar .nav-link {
   color: #0f172a !important;
 }
 
-:where(.light-mode) .sidebar .nav-link:hover {
+.light-mode .sidebar .nav-link:hover {
   background: #e0e7ff;
   color: #1e293b !important;
 }
@@ -181,244 +181,250 @@ body {
 }
 
 /* Dark Mode Styles */
-:where(.dark-mode) {
+.dark-mode {
   background: #000000 !important; /* Solid black background */
-  color: #e2e8f0;
+  color: #e2e8f0 !important;
 }
 
-:where(.dark-mode) .navbar {
+.dark-mode .navbar {
   background: #1e293b;
   border-bottom: 1px solid #374151;
 }
 
-:where(.dark-mode) .navbar-brand {
+.dark-mode .navbar-brand {
   color: #e2e8f0 !important;
 }
 
-:where(.dark-mode) .navbar-brand:hover {
+.dark-mode .navbar-brand:hover {
   color: #ffffff !important;
 }
 
-:where(.dark-mode) .navbar-nav .nav-link {
+.dark-mode .navbar-nav .nav-link {
   color: #e2e8f0 !important;
 }
 
-:where(.dark-mode) .navbar-nav .nav-link:hover {
+.dark-mode .navbar-nav .nav-link:hover {
   color: #ffffff !important;
   background: #374151;
   border-radius: 0.25rem;
 }
 
-:where(.dark-mode) .navbar-nav .nav-item.active .nav-link {
+.dark-mode .navbar-nav .nav-item.active .nav-link {
   background: #f87171;
   color: #ffffff !important;
 }
 
-:where(.dark-mode) .jumbotron {
+.dark-mode .jumbotron {
   background: #1e293b !important; /* Dark gray background to match cards */
-  color: #e2e8f0;
+  color: #e2e8f0 !important;
   border: 1px solid #374151;
   border-radius: 0.5rem;
 }
 
-:where(.dark-mode) .jumbotron .display-4 {
+.dark-mode .jumbotron .display-4 {
   color: #ffffff !important;
 }
 
-:where(.dark-mode) .jumbotron .lead {
+.dark-mode .jumbotron .lead {
   color: #94a3b8 !important;
 }
 
-:where(.dark-mode) .jumbotron p {
+.dark-mode .jumbotron p {
   color: #94a3b8 !important;
 }
 
-:where(.dark-mode) .jumbotron hr {
+.dark-mode .jumbotron hr {
   border-color: #4b5563;
 }
 
-:where(.dark-mode) .card {
+.dark-mode .card {
   background: #1e293b;
   border: 1px solid #374151;
   border-radius: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
-:where(.dark-mode) .card-header {
+.dark-mode .card-header {
   background: #f87171;
-  color: #ffffff;
+  color: #ffffff !important;
   border-bottom: none;
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
-:where(.dark-mode) .card-title {
+.dark-mode .card .card-title {
   color: #ffffff !important;
 }
 
-:where(.dark-mode) .card-text {
+.dark-mode .card .card-text {
   color: #94a3b8 !important;
 }
 
-:where(.dark-mode) .form-label,
-:where(.dark-mode) .form-group label {
+/* Fallback for text inside .card in dark mode */
+.dark-mode .card h4,
+.dark-mode .card p {
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .form-label,
+.dark-mode .form-group label {
   color: #ffffff !important;
 }
 
-:where(.dark-mode) .form-control {
+.dark-mode .form-control {
   background: #2d3748;
   color: #e2e8f0 !important;
   border: 1px solid #4b5563;
   border-radius: 0.5rem;
 }
 
-:where(.dark-mode) .form-control:focus {
+.dark-mode .form-control:focus {
   border-color: #f87171;
   box-shadow: 0 0 5px rgba(248, 113, 113, 0.3);
 }
 
-:where(.dark-mode) .form-control::placeholder {
+.dark-mode .form-control::placeholder {
   color: #64748b !important;
 }
 
-:where(.dark-mode) .form-text {
+.dark-mode .form-text {
   color: #fb923c !important;
 }
 
-:where(.dark-mode) .text-muted {
+.dark-mode .text-muted {
   color: #94a3b8 !important;
 }
 
-:where(.dark-mode) .text-muted:hover {
+.dark-mode .text-muted:hover {
   color: #e2e8f0 !important;
 }
 
-:where(.dark-mode) h1,
-:where(.dark-mode) h2,
-:where(.dark-mode) h3,
-:where(.dark-mode) h4,
-:where(.dark-mode) h5,
-:where(.dark-mode) h6 {
-  color: #ffffff;
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+  color: #ffffff !important;
 }
 
 /* Light Mode Styles */
-:where(.light-mode) {
+.light-mode {
   background: linear-gradient(135deg, #e2e8f0, #f1f5f9) !important; /* Softer grayish-blue to off-white gradient */
-  color: #0f172a;
+  color: #0f172a !important;
 }
 
-:where(.light-mode) .navbar {
+.light-mode .navbar {
   background: #f1f5f9;
   border-bottom: 1px solid #d1d5db;
 }
 
-:where(.light-mode) .navbar-brand {
+.light-mode .navbar-brand {
   color: #0f172a !important;
 }
 
-:where(.light-mode) .navbar-brand:hover {
+.light-mode .navbar-brand:hover {
   color: #1e293b !important;
 }
 
-:where(.light-mode) .navbar-nav .nav-link {
+.light-mode .navbar-nav .nav-link {
   color: #0f172a !important;
 }
 
-:where(.light-mode) .navbar-nav .nav-link:hover {
+.light-mode .navbar-nav .nav-link:hover {
   color: #1e293b !important;
   background: #e0e7ff;
   border-radius: 0.25rem;
 }
 
-:where(.light-mode) .navbar-nav .nav-item.active .nav-link {
+.light-mode .navbar-nav .nav-item.active .nav-link {
   background: #f97316;
   color: #ffffff !important;
 }
 
-:where(.light-mode) .jumbotron {
+.light-mode .jumbotron {
   background: #ffffff !important; /* White background for light mode */
-  color: #0f172a;
+  color: #0f172a !important;
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
 }
 
-:where(.light-mode) .jumbotron .display-4 {
+.light-mode .jumbotron .display-4 {
   color: #1e293b !important;
 }
 
-:where(.light-mode) .jumbotron .lead {
+.light-mode .jumbotron .lead {
   color: #475569 !important;
 }
 
-:where(.light-mode) .jumbotron p {
+.light-mode .jumbotron p {
   color: #475569 !important;
 }
 
-:where(.light-mode) .jumbotron hr {
+.light-mode .jumbotron hr {
   border-color: #d1d5db;
 }
 
-:where(.light-mode) .card {
+.light-mode .card {
   background: #ffffff;
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
-:where(.light-mode) .card-header {
+.light-mode .card-header {
   background: #f97316;
-  color: #ffffff;
+  color: #ffffff !important;
   border-bottom: none;
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
-:where(.light-mode) .card-title {
+.light-mode .card-title {
   color: #1e293b !important;
 }
 
-:where(.light-mode) .card-text {
+.light-mode .card-text {
   color: #475569 !important;
 }
 
-:where(.light-mode) .form-label {
+.light-mode .form-label {
   color: #1e293b !important;
 }
 
-:where(.light-mode) .form-control {
+.light-mode .form-control {
   background: #f1f5f9;
-  color: #0f172a;
+  color: #0f172a !important;
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
 }
 
-:where(.light-mode) .form-control:focus {
+.light-mode .form-control:focus {
   border-color: #f97316;
   box-shadow: 0 0 5px rgba(249, 115, 22, 0.3);
 }
 
-:where(.light-mode) .form-control::placeholder {
+.light-mode .form-control::placeholder {
   color: #6b7280 !important;
 }
 
-:where(.light-mode) .form-text {
+.light-mode .form-text {
   color: #ef4444 !important;
 }
 
-:where(.light-mode) .text-muted {
+.light-mode .text-muted {
   color: #6b7280 !important;
 }
 
-:where(.light-mode) .text-muted:hover {
+.light-mode .text-muted:hover {
   color: #1e293b !important;
 }
 
-:where(.light-mode) h1,
-:where(.light-mode) h2,
-:where(.light-mode) h3,
-:where(.light-mode) h4,
-:where(.light-mode) h5,
-:where(.light-mode) h6 {
-  color: #1e293b;
+.light-mode h1,
+.light-mode h2,
+.light-mode h3,
+.light-mode h4,
+.light-mode h5,
+.light-mode h6 {
+  color: #1e293b !important;
 }
 
 /* Override Bootstrap container for padding and centering */
@@ -494,7 +500,7 @@ body {
 }
 
 /* Style buttons in light mode (e.g., "View Transactions") */
-:where(.light-mode) .btn-info {
+.light-mode .btn-info {
   background: #f97316;
   border: none;
   color: #ffffff;
@@ -504,13 +510,13 @@ body {
   transition: all 0.3s ease;
 }
 
-:where(.light-mode) .btn-info:hover {
+.light-mode .btn-info:hover {
   background: #ef4444;
   transform: scale(1.05);
 }
 
 /* Style buttons in dark mode (e.g., "View Transactions") */
-:where(.dark-mode) .btn-info {
+.dark-mode .btn-info {
   background: #f87171;
   border: none;
   color: #ffffff;
@@ -520,7 +526,7 @@ body {
   transition: all 0.3s ease;
 }
 
-:where(.dark-mode) .btn-info:hover {
+.dark-mode .btn-info:hover {
   background: #fb923c;
   transform: scale(1.05);
 }

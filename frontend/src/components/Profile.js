@@ -1,4 +1,3 @@
-// frontend/src/components/Profile.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../config'; // Add this import
@@ -42,10 +41,15 @@ const Profile = () => {
     return (
         <div className="profile-container">
             <h2 className="mb-4">Profile</h2>
-            <div className="card p-4 mb-4">
-                <h4>User Information</h4>
-                <p><strong>Username:</strong> {userData.username}</p>
-                <p><strong>Role:</strong> {userData.user_type}</p>
+            <div className="card mb-4">
+                <div className="card-header">
+                    User Information
+                </div>
+                <div className="card-body">
+                    <h4 className="card-title">User Information</h4>
+                    <p className="card-text"><strong>Username:</strong> {userData.username}</p>
+                    <p className="card-text"><strong>Role:</strong> {userData.user_type}</p>
+                </div>
             </div>
             <h3 className="mb-3">Transaction History</h3>
             {transactions.length > 0 ? (
