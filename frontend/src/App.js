@@ -16,8 +16,8 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userType, setUserType] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark'); // Default to dark mode
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State for sidebar toggle
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
         // Check if user is authenticated on component mount

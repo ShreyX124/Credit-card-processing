@@ -1,8 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom'; // Added useLocation
 import { FaBars, FaTachometerAlt, FaCreditCard, FaHistory, FaUser, FaSignOutAlt } from 'react-icons/fa';
 
 const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleSidebar, isSidebarOpen }) => {
+    const location = useLocation(); // Get the current route
+
+    // Helper function to determine if a link is active
+    const isActive = (path) => location.pathname === path;
+
     return (
         <>
             {/* Sidebar */}
@@ -17,7 +22,7 @@ const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleS
                         <ul className="nav flex-column">
                             <li className="nav-item">
                                 <Link
-                                    className="nav-link"
+                                    className={`nav-link ${isActive(userType === 'customer' ? '/customer/dashboard' : '/merchant/dashboard') ? 'active' : ''}`}
                                     to={userType === 'customer' ? '/customer/dashboard' : '/merchant/dashboard'}
                                     onClick={toggleSidebar}
                                 >
@@ -29,7 +34,7 @@ const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleS
                             {userType === 'customer' && (
                                 <li className="nav-item">
                                     <Link
-                                        className="nav-link"
+                                        className={`nav-link ${isActive('/payment') ? 'active' : ''}`}
                                         to="/payment"
                                         onClick={toggleSidebar}
                                     >
@@ -41,7 +46,7 @@ const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleS
 
                             <li className="nav-item">
                                 <Link
-                                    className="nav-link"
+                                    className={`nav-link ${isActive('/transactions') ? 'active' : ''}`}
                                     to="/transactions"
                                     onClick={toggleSidebar}
                                 >
@@ -52,7 +57,7 @@ const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleS
 
                             <li className="nav-item">
                                 <Link
-                                    className="nav-link"
+                                    className={`nav-link ${isActive('/profile') ? 'active' : ''}`}
                                     to="/profile"
                                     onClick={toggleSidebar}
                                 >

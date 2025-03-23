@@ -17,20 +17,20 @@ body {
 
 /* Sidebar Styles */
 .sidebar {
-  width: 80px; /* Increased collapsed width for more space */
+  width: 80px; /* Collapsed width */
   background: #1e293b; /* Match the dark mode card background */
   position: fixed;
   top: 0;
   left: 0; /* Always visible, starting at the left edge */
   height: 100%;
   overflow-y: auto;
-  transition: width 0.3s ease; /* Animate width instead of left */
+  transition: width 0.3s ease; /* Animate width */
   z-index: 1000; /* Ensure it’s above other content */
 }
 
 /* Expanded state */
 .sidebar.sidebar-open {
-  width: 350px; /* Increased expanded width for a larger sidebar */
+  width: 350px; /* Expanded width */
 }
 
 /* Show sidebar on hover */
@@ -98,6 +98,17 @@ body {
   justify-content: flex-start; /* Align to the left when expanded */
 }
 
+/* Highlight Active Link */
+.sidebar .nav-link.active {
+  background: #f87171; /* Highlight color in dark mode */
+  color: #ffffff !important;
+}
+
+:where(.light-mode) .sidebar .nav-link.active {
+  background: #f97316; /* Highlight color in light mode */
+  color: #ffffff !important;
+}
+
 /* Navigation Icons */
 .nav-icon {
   margin-right: 0; /* Remove margin in collapsed state */
@@ -136,7 +147,22 @@ body {
 /* Main Content Styles */
 .main-content {
   flex: 1;
-  width: 100%;
+  width: calc(100% - 80px); /* Adjust width to account for collapsed sidebar */
+  margin-left: 80px; /* Default margin matches collapsed sidebar width */
+  transition: margin-left 0.3s ease, width 0.3s ease; /* Smooth transition for both margin-left and width */
+}
+
+/* Adjust margin-left and width when sidebar is present and expanded */
+.app-wrapper:has(.sidebar.sidebar-open) .main-content,
+.app-wrapper:has(.sidebar:hover) .main-content {
+  margin-left: 350px; /* Matches expanded sidebar width */
+  width: calc(100% - 350px); /* Adjust width to account for expanded sidebar */
+}
+
+/* No margin-left or width adjustment when sidebar is not present (unauthenticated pages) */
+.app-wrapper:not(:has(.sidebar)) .main-content {
+  margin-left: 0;
+  width: 100%; /* Full width when no sidebar */
 }
 
 /* Add a subtle shadow to the sidebar */
