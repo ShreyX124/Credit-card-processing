@@ -17,7 +17,7 @@ body {
 
 /* Sidebar Styles */
 .sidebar {
-  width: 60px; /* Collapsed width (just enough for icons) */
+  width: 80px; /* Increased collapsed width for more space */
   background: #1e293b; /* Match the dark mode card background */
   position: fixed;
   top: 0;
@@ -30,12 +30,12 @@ body {
 
 /* Expanded state */
 .sidebar.sidebar-open {
-  width: 300px; /* Larger width when open */
+  width: 350px; /* Increased expanded width for a larger sidebar */
 }
 
 /* Show sidebar on hover */
 .sidebar:hover {
-  width: 300px; /* Expand on hover */
+  width: 350px; /* Expand on hover */
 }
 
 /* Sidebar Toggle Button */
@@ -51,6 +51,11 @@ body {
   right: 0; /* Positioned on the right edge of the sidebar */
   border-radius: 0 0.5rem 0.5rem 0; /* Rounded on the right side */
   transition: background 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 :where(.light-mode) .sidebar-toggle-btn {
@@ -80,6 +85,7 @@ body {
   display: flex;
   align-items: center;
   white-space: nowrap; /* Prevent text wrapping */
+  justify-content: center; /* Center icons when collapsed */
 }
 
 .sidebar .nav-link:hover {
@@ -87,11 +93,21 @@ body {
   color: #ffffff !important;
 }
 
+.sidebar.sidebar-open .nav-link,
+.sidebar:hover .nav-link {
+  justify-content: flex-start; /* Align to the left when expanded */
+}
+
 /* Navigation Icons */
 .nav-icon {
-  margin-right: 0.75rem;
+  margin-right: 0; /* Remove margin in collapsed state */
   font-size: 1.2rem;
   flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.sidebar.sidebar-open .nav-icon,
+.sidebar:hover .nav-icon {
+  margin-right: 0.75rem; /* Add margin back when expanded */
 }
 
 /* Navigation Text */
@@ -131,6 +147,11 @@ body {
 /* Ensure the sidebar content is aligned properly */
 .sidebar .nav-item {
   margin-bottom: 0.5rem;
+}
+
+/* Add a hover effect for the icons in the collapsed state */
+.sidebar .nav-link:hover .nav-icon {
+  transform: scale(1.1); /* Slightly enlarge the icon on hover */
 }
 
 /* Dark Mode Styles */
