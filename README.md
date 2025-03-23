@@ -1,5 +1,5 @@
 # Credit-card-processing
-Delete the folder backend/node_modules, files: backend/package-lock.json and backend/package.json
+Delete the folder backend/node_modules, files: backend/package-lock.json
 To run the flie it is required to type in the terminal (if you are using linux) 
 ./run.sh 
 if  you are on windows then (open the run.sh files there are the commands in that)
