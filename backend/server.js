@@ -12,6 +12,7 @@ try {
 }
 const paymentRoutes = require('./routes/payment');
 const transactionRoutes = require('./routes/transaction');
+const userRoutes = require('./routes/users'); // Add this
 const { initializeDatabase } = require('./config/database');
 
 const app = express();
@@ -31,6 +32,7 @@ console.log('Auth routes mounted');
 
 app.use('/api/payment', paymentRoutes);
 app.use('/api/transactions', transactionRoutes);
+app.use('/api/users', userRoutes); // Add this
 
 // Basic route
 app.get('/', (req, res) => {

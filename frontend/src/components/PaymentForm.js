@@ -1,22 +1,39 @@
 // src/components/PaymentForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config'; // Add this import
 
 const PaymentForm = () => {
   const [formData, setFormData] = useState({
     cardNumber: '',
     cardExpiry: '',
     cardCvv: '',
-    amount: ''
+    amount: '',
+    merchantId: '' // Add merchantId to formData
   });
 
+  const [merchants, setMerchants] = useState([]); // To store list of merchants
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const navigate = useNavigate();
 
-  const { cardNumber, cardExpiry, cardCvv, amount } = formData;
+  const { cardNumber, cardExpiry, cardCvv, amount, merchantId } = formData;
+
+  // Fetch merchants on component mount
+  useEffect(() => {
+    const fetchMerchants = async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/api/users/merchants`);
+        setMerchants(res.data);
+      } catch (err) {
+        console.error('Error fetching merchants:', err);
+        setErrors(prev => ({ ...prev, merchantId: 'Failed to load merchants' }));
+      }
+    };
+    fetchMerchants();
+  }, []);
 
   const onChange = e => {
     const { name, value } = e.target;
@@ -62,6 +79,8 @@ const PaymentForm = () => {
         newErrors.amount = 'Amount must be a valid number';
       }
       setFormData({ ...formData, [name]: value });
+    } else if (name === 'merchantId') {
+      setFormData({ ...formData, [name]: value });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -99,6 +118,10 @@ const PaymentForm = () => {
       newErrors.amount = 'Amount must be greater than 0';
     }
     
+    if (!merchantId) {
+      newErrors.merchantId = 'Please select a merchant';
+    }
+
     return newErrors;
   };
 
@@ -119,13 +142,14 @@ const PaymentForm = () => {
       
       const paymentData = {
         cardNumber: cardNumber.replace(/\s/g, ''), // Remove spaces
-        cardExpiry,
-        cardCvv,
-        amount: parseFloat(amount)
+        expiry: cardExpiry, // Rename to match backend
+        cvv: cardCvv, // Rename to match backend
+        amount: parseFloat(amount),
+        merchantId // Add merchantId
       };
       
       const res = await axios.post(
-        'http://localhost:5000/api/payment/process',
+        `${API_BASE_URL}/api/payment/process`, // Use API_BASE_URL
         paymentData,
         {
           headers: {
@@ -143,7 +167,8 @@ const PaymentForm = () => {
           cardNumber: '',
           cardExpiry: '',
           cardCvv: '',
-          amount: ''
+          amount: '',
+          merchantId: ''
         });
       }
     } catch (err) {
@@ -192,6 +217,26 @@ const PaymentForm = () => {
             )}
             
             <form onSubmit={onSubmit}>
+              <div className="form-group mb-3">
+                <label>Select Merchant</label>
+                <select
+                  className={`form-control ${errors.merchantId ? 'is-invalid' : ''}`}
+                  name="merchantId"
+                  value={merchantId}
+                  onChange={onChange}
+                >
+                  <option value="">Select a merchant</option>
+                  {merchants.map(merchant => (
+                    <option key={merchant.id} value={merchant.id}>
+                      {merchant.username}
+                    </option>
+                  ))}
+                </select>
+                {errors.merchantId && (
+                  <div className="invalid-feedback">{errors.merchantId}</div>
+                )}
+              </div>
+
               <div className="form-group mb-3">
                 <label>Card Number</label>
                 <input

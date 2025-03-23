@@ -56,18 +56,36 @@ const processPaymentGateway = () => {
   });
 };
 
+// Helper function to promisify db.get
+const getMerchant = (merchantId) => {
+  return new Promise((resolve, reject) => {
+    db.get('SELECT id FROM users WHERE id = ? AND user_type = ?', [merchantId, 'merchant'], (err, merchant) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(merchant);
+    });
+  });
+};
+
 // @route   POST /api/payment/process
 // @desc    Process a payment
 // @access  Private (Customer only)
 router.post('/process', authenticate, async (req, res) => {
-  const { amount, cardNumber, cardExpiry, cardCvv } = req.body;
+  const { amount, cardNumber, expiry, cvv, merchantId } = req.body;
   const userId = req.user.id;
 
-  if (!amount || !cardNumber || !cardExpiry || !cardCvv) {
-    return res.status(400).json({ msg: 'Please enter all fields' });
+  if (!amount || !cardNumber || !expiry || !cvv || !merchantId) {
+    return res.status(400).json({ msg: 'Please enter all fields, including merchant ID' });
   }
 
   try {
+    // Verify that the merchant exists
+    const merchant = await getMerchant(merchantId);
+    if (!merchant) {
+      return res.status(400).json({ msg: 'Invalid merchant ID' });
+    }
+
     // Check for fraud
     const fraudCheck = await checkFraud(amount, userId);
     
@@ -82,16 +100,17 @@ router.post('/process', authenticate, async (req, res) => {
 
     // Encrypt sensitive data
     const encryptedCardNumber = encrypt(cardNumber);
-    const encryptedCardExpiry = encrypt(cardExpiry);
-    const encryptedCardCvv = encrypt(cardCvv);
+    const encryptedCardExpiry = encrypt(expiry);
+    const encryptedCardCvv = encrypt(cvv);
 
     // Save transaction
     db.run(
       `INSERT INTO transactions 
-      (user_id, amount, card_number, card_expiry, card_cvv, status, fraud_flag) 
-      VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      (user_id, merchant_id, amount, card_number, card_expiry, card_cvv, status, fraud_flag) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         userId, 
+        merchantId,
         amount, 
         encryptedCardNumber, 
         encryptedCardExpiry, 

@@ -31,13 +31,16 @@ const initializeDatabase = () => {
             }
         });
 
-        // Create transactions table
+        // Create transactions table with additional columns
         db.run(`
             CREATE TABLE IF NOT EXISTS transactions (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id INTEGER,
                 merchant_id INTEGER,
                 amount REAL NOT NULL,
+                card_number TEXT NOT NULL,
+                card_expiry TEXT NOT NULL,
+                card_cvv TEXT NOT NULL,
                 status TEXT NOT NULL,
                 fraud_flag BOOLEAN DEFAULT 0,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,

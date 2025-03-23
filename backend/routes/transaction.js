@@ -17,14 +17,15 @@ router.get('/', authenticate, (req, res) => {
   let query, params;
   
   if (userType === 'merchant') {
-    // Merchants can see all transactions
+    // Merchants can only see transactions where they are the merchant
     query = `
       SELECT t.*, u.username as customer_email
       FROM transactions t
       JOIN users u ON t.user_id = u.id
+      WHERE t.merchant_id = ?
       ORDER BY t.created_at DESC
     `;
-    params = [];
+    params = [userId];
   } else {
     // Customers can only see their own transactions
     query = `
