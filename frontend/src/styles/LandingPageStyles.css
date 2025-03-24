@@ -1,0 +1,329 @@
+/* frontend/src/styles/LandingPageStyles.css */
+.landing-container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+    overflow: hidden;
+  }
+  
+  /* 3D Spinning Donut (Top-Left) */
+  .donut {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: -50px;
+    left: -50px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid rgba(255, 107, 107, 0.3);
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.2);
+    animation: spin 20s linear infinite;
+    transform-style: preserve-3d;
+  }
+  
+  .donut::before,
+  .donut::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: transparent;
+  }
+  
+  .donut::before {
+    background: radial-gradient(circle, transparent 40%, rgba(255, 107, 107, 0.1) 50%);
+    transform: rotateX(60deg);
+  }
+  
+  .donut::after {
+    background: radial-gradient(circle, transparent 40%, rgba(255, 107, 107, 0.1) 50%);
+    transform: rotateY(60deg);
+  }
+  
+  /* Grid lines for the donut */
+  .donut::before {
+    background: radial-gradient(circle, transparent 40%, rgba(255, 107, 107, 0.1) 50%),
+                repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(255, 107, 107, 0.2) 5px, rgba(255, 107, 107, 0.2) 10px),
+                repeating-linear-gradient(90deg, transparent, transparent 5px, rgba(255, 107, 107, 0.2) 5px, rgba(255, 107, 107, 0.2) 10px);
+  }
+  
+  /* Rotating Earth-like Sphere (Bottom-Right) */
+  .earth {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    bottom: -50px;
+    right: -50px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid rgba(108, 117, 125, 0.3);
+    box-shadow: 0 0 20px rgba(108, 117, 125, 0.2);
+    animation: rotate 30s linear infinite;
+    transform-style: preserve-3d;
+  }
+  
+  .earth::before,
+  .earth::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: transparent;
+  }
+  
+  .earth::before {
+    background: radial-gradient(circle, rgba(108, 117, 125, 0.1) 40%, transparent 50%);
+    transform: rotateX(45deg);
+  }
+  
+  .earth::after {
+    background: radial-gradient(circle, rgba(108, 117, 125, 0.1) 40%, transparent 50%);
+    transform: rotateY(45deg);
+  }
+  
+  /* Grid lines for the Earth */
+  .earth::before {
+    background: radial-gradient(circle, rgba(108, 117, 125, 0.1) 40%, transparent 50%),
+                repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(108, 117, 125, 0.2) 5px, rgba(108, 117, 125, 0.2) 10px),
+                repeating-linear-gradient(90deg, transparent, transparent 5px, rgba(108, 117, 125, 0.2) 5px, rgba(108, 117, 125, 0.2) 10px);
+  }
+  
+  /* Animations for spinning and rotating */
+  @keyframes spin {
+    0% {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    100% {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    100% {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
+  
+  /* Floating Particles */
+  .floating-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: float 15s infinite ease-in-out;
+  }
+  
+  .particle-0 { top: 10%; left: 20%; animation-delay: 0s; }
+  .particle-1 { top: 15%; left: 70%; animation-delay: 2s; }
+  .particle-2 { top: 30%; left: 40%; animation-delay: 4s; }
+  .particle-3 { top: 50%; left: 10%; animation-delay: 6s; }
+  .particle-4 { top: 60%; left: 80%; animation-delay: 8s; }
+  .particle-5 { top: 70%; left: 30%; animation-delay: 10s; }
+  .particle-6 { top: 80%; left: 60%; animation-delay: 12s; }
+  .particle-7 { top: 20%; left: 50%; animation-delay: 14s; }
+  .particle-8 { top: 40%; left: 90%; animation-delay: 16s; }
+  .particle-9 { top: 90%; left: 20%; animation-delay: 18s; }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-20px);
+      opacity: 0.6;
+    }
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    text-align: center;
+    padding: 2rem;
+    z-index: 1;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+    color: #cccccc;
+    margin-bottom: 2rem;
+  }
+  
+  /* 3D Credit Card */
+  .credit-card {
+    width: 300px;
+    height: 180px;
+    margin: 0 auto 2rem;
+    background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .card-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+  }
+  
+  .card-chip {
+    width: 40px;
+    height: 30px;
+    background: #d4d4d4;
+    border-radius: 5px;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+  
+  .card-number {
+    position: absolute;
+    bottom: 3rem;
+    left: 1rem;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+  
+  .card-details {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 2rem);
+  }
+  
+  .card-holder,
+  .card-expiry {
+    font-size: 0.9rem;
+  }
+  
+  /* Call to Action Button */
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .btn-primary {
+    background-color: #ff6b6b;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Wave Animation */
+  .wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 0;
+  }
+  
+  .wave svg {
+    width: 100%;
+    height: 100%;
+    animation: wave 10s infinite linear;
+  }
+  
+  @keyframes wave {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-1440px);
+    }
+  }
+  
+  /* Footer */
+  .landing-footer {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    color: #cccccc;
+    z-index: 1;
+  }
+  
+  /* Theme Support */
+  .light-mode .landing-container {
+    background: linear-gradient(135deg, #f0f0f0 0%, #d9e6f2 100%);
+  }
+  
+  .light-mode .hero-title {
+    color: #333333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .light-mode .hero-subtitle {
+    color: #666666;
+  }
+  
+  .light-mode .credit-card {
+    background: linear-gradient(135deg, #ff8787 0%, #ffd07b 100%);
+  }
+  
+  .light-mode .landing-footer {
+    background: rgba(255, 255, 255, 0.5);
+    color: #333333;
+  }
+  
+  .light-mode .donut {
+    border-color: rgba(255, 107, 107, 0.5);
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+  }
+  
+  .light-mode .donut::before,
+  .light-mode .donut::after {
+    background: radial-gradient(circle, transparent 40%, rgba(255, 107, 107, 0.2) 50%),
+                repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(255, 107, 107, 0.3) 5px, rgba(255, 107, 107, 0.3) 10px),
+                repeating-linear-gradient(90deg, transparent, transparent 5px, rgba(255, 107, 107, 0.3) 5px, rgba(255, 107, 107, 0.3) 10px);
+  }
+  
+  .light-mode .earth {
+    border-color: rgba(108, 117, 125, 0.5);
+    box-shadow: 0 0 20px rgba(108, 117, 125, 0.3);
+  }
+  
+  .light-mode .earth::before,
+  .light-mode .earth::after {
+    background: radial-gradient(circle, rgba(108, 117, 125, 0.2) 40%, transparent 50%),
+                repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(108, 117, 125, 0.3) 5px, rgba(108, 117, 125, 0.3) 10px),
+                repeating-linear-gradient(90deg, transparent, transparent 5px, rgba(108, 117, 125, 0.3) 5px, rgba(108, 117, 125, 0.3) 10px);
+  }
+  
+  .light-mode .particle {
+    background: rgba(0, 0, 0, 0.3);
+  }

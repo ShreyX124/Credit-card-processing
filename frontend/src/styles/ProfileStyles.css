@@ -2,6 +2,21 @@
 
 /* Style profile container (used in Profile component) */
 .profile-container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 15px; /* Match LandingPage rounded corners */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Match LandingPage shadow */
+}
+
+/* Dark Mode */
+.dark-mode .profile-container {
+  background: #1e293b; /* Match Navbar dark mode background */
+  border: 1px solid #374151;
+}
+
+/* Light Mode */
+.light-mode .profile-container {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+}

@@ -2,36 +2,43 @@
 
 /* Style text elements (e.g., in CustomerDashboard, MerchantDashboard) */
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 600;
-  }
-  
-  p {
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-  
-  /* Style small text (e.g., form hints) */
-  .form-text {
-    font-size: 0.875rem;
-  }
-  
-  /* Style muted text (used in links like "New user? Register here") */
-  .text-muted {
-    font-size: 0.875rem;
-  }
-  
-  .dark-mode .text-muted {
-    color: #94a3b8 !important;
-  }
-  
-  .dark-mode .text-muted:hover {
-    color: #e2e8f0 !important;
-  }
-  
-  .light-mode .text-muted {
-    color: #6b7280 !important;
-  }
-  
-  .light-mode .text-muted:hover {
-    color: #1e293b !important;
-  }
+  font-weight: 600;
+}
+
+h1 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Match LandingPage text shadow */
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Style small text (e.g., form hints) */
+.form-text {
+  font-size: 0.875rem;
+}
+
+/* Style muted text (used in links like "New user? Register here") */
+.text-muted {
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+/* Dark Mode */
+.dark-mode .text-muted {
+  color: #94a3b8 !important;
+}
+
+.dark-mode .text-muted:hover {
+  color: #e2e8f0 !important;
+}
+
+/* Light Mode */
+.light-mode .text-muted {
+  color: #6b7280 !important;
+}
+
+.light-mode .text-muted:hover {
+  color: #1e293b !important;
+}

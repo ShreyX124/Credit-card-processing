@@ -2,65 +2,63 @@
 
 /* Style cards (used in PaymentForm, Profile, etc.) */
 .card {
-    transition: all 0.3s ease;
-  }
-  
-  .card-header {
-    font-size: 1.25rem; /* Smaller font size for card headers */
-    font-weight: 600;
-    padding: 1rem;
-  }
-  
-  .card-body {
-    padding: 1.5rem;
-  }
-  
-  .dark-mode .card {
-    background: #1e293b;
-    border: 1px solid #374151;
-    border-radius: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .dark-mode .card-header {
-    background: #f87171;
-    color: #ffffff !important;
-    border-bottom: none;
-    border-radius: 0.5rem 0.5rem 0 0;
-  }
-  
-  .dark-mode .card .card-title {
-    color: #ffffff !important;
-  }
-  
-  .dark-mode .card .card-text {
-    color: #94a3b8 !important;
-  }
-  
-  /* Fallback for text inside .card in dark mode */
-  .dark-mode .card h4,
-  .dark-mode .card p {
-    color: #e2e8f0 !important;
-  }
-  
-  .light-mode .card {
-    background: #ffffff;
-    border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .light-mode .card-header {
-    background: #f97316;
-    color: #ffffff !important;
-    border-bottom: none;
-    border-radius: 0.5rem 0.5rem 0 0;
-  }
-  
-  .light-mode .card-title {
-    color: #1e293b !important;
-  }
-  
-  .light-mode .card-text {
-    color: #475569 !important;
-  }
+  border-radius: 15px; /* Match LandingPage rounded corners */
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Match LandingPage shadow */
+}
+
+.card-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 1rem;
+  border-radius: 15px 15px 0 0; /* Match LandingPage rounded corners */
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Dark Mode */
+.dark-mode .card {
+  background: #1e293b; /* Match Navbar dark mode background */
+  border: 1px solid #374151;
+}
+
+.dark-mode .card-header {
+  background: linear-gradient(90deg, #ff6b6b, #feca57); /* Match LandingPage gradient */
+  color: #ffffff !important;
+  border-bottom: none;
+}
+
+.dark-mode .card .card-title,
+.dark-mode .card h4,
+.dark-mode .card p {
+  color: #e2e8f0 !important;
+}
+
+.dark-mode .card .card-text {
+  color: #94a3b8 !important;
+}
+
+/* Light Mode */
+.light-mode .card {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+}
+
+.light-mode .card-header {
+  background: linear-gradient(90deg, #ff8787, #ffd07b); /* Match LandingPage light mode gradient */
+  color: #ffffff !important;
+  border-bottom: none;
+}
+
+.light-mode .card-title,
+.light-mode .card h4,
+.light-mode .card p {
+  color: #1e293b !important;
+}
+
+.light-mode .card-text {
+  color: #475569 !important;
+}

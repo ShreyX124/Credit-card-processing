@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/GlobalStyles.css'; // Import the global styles
+import LandingPage from './components/LandingPage'; // Import the new LandingPage component
 import Login from './components/Login';
 import CustomerDashboard from './components/CustomerDashboard';
 import MerchantDashboard from './components/MerchantDashboard';
@@ -72,20 +73,23 @@ function App() {
     return (
         <Router>
             <div className={`app-wrapper ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
-                {/* Sidebar will be rendered by Navbar */}
-                <Navbar
-                    isAuthenticated={isAuthenticated}
-                    userType={userType}
-                    logout={logout}
-                    theme={theme}
-                    toggleTheme={toggleTheme}
-                    toggleSidebar={toggleSidebar}
-                    isSidebarOpen={isSidebarOpen}
-                    setIsSidebarOpen={setIsSidebarOpen} // Pass setIsSidebarOpen to Navbar
-                />
+                {/* Conditionally render Navbar only for authenticated users */}
+                {isAuthenticated && (
+                    <Navbar
+                        isAuthenticated={isAuthenticated}
+                        userType={userType}
+                        logout={logout}
+                        theme={theme}
+                        toggleTheme={toggleTheme}
+                        toggleSidebar={toggleSidebar}
+                        isSidebarOpen={isSidebarOpen}
+                        setIsSidebarOpen={setIsSidebarOpen}
+                    />
+                )}
                 <div className="main-content">
                     <div className="container mt-4">
                         <Routes>
+                            {/* Default route: Landing Page */}
                             <Route
                                 path="/"
                                 element={
@@ -96,10 +100,22 @@ function App() {
                                             <Navigate to="/merchant/dashboard" />
                                         )
                                     ) : (
+                                        <LandingPage />
+                                    )
+                                }
+                            />
+                            {/* Login route */}
+                            <Route
+                                path="/login"
+                                element={
+                                    isAuthenticated ? (
+                                        <Navigate to={userType === 'customer' ? '/customer/dashboard' : '/merchant/dashboard'} />
+                                    ) : (
                                         <Login login={login} />
                                     )
                                 }
                             />
+                            {/* Registration route */}
                             <Route
                                 path="/register"
                                 element={
@@ -110,6 +126,7 @@ function App() {
                                     )
                                 }
                             />
+                            {/* Customer Dashboard */}
                             <Route
                                 path="/customer/dashboard"
                                 element={
@@ -122,6 +139,7 @@ function App() {
                                     </ProtectedRoute>
                                 }
                             />
+                            {/* Merchant Dashboard */}
                             <Route
                                 path="/merchant/dashboard"
                                 element={
@@ -134,6 +152,7 @@ function App() {
                                     </ProtectedRoute>
                                 }
                             />
+                            {/* Payment Form */}
                             <Route
                                 path="/payment"
                                 element={
@@ -146,6 +165,7 @@ function App() {
                                     </ProtectedRoute>
                                 }
                             />
+                            {/* Transaction History */}
                             <Route
                                 path="/transactions"
                                 element={
@@ -157,6 +177,7 @@ function App() {
                                     </ProtectedRoute>
                                 }
                             />
+                            {/* Profile */}
                             <Route
                                 path="/profile"
                                 element={
@@ -173,6 +194,7 @@ function App() {
                 </div>
             </div>
         </Router>
+        
     );
 }
 

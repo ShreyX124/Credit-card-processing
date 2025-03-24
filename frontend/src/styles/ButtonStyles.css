@@ -2,48 +2,49 @@
 
 /* Style buttons */
 .btn-primary {
-    background: linear-gradient(90deg, #f87171, #fb923c);
-    border: none;
-    color: #ffffff;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-primary:hover {
-    background: linear-gradient(90deg, #fb923c, #f87171);
-    transform: scale(1.05);
-  }
-  
-  /* Style buttons in light mode (e.g., "View Transactions") */
-  .light-mode .btn-info {
-    background: #f97316;
-    border: none;
-    color: #ffffff;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-  }
-  
-  .light-mode .btn-info:hover {
-    background: #ef4444;
-    transform: scale(1.05);
-  }
-  
-  /* Style buttons in dark mode (e.g., "View Transactions") */
-  .dark-mode .btn-info {
-    background: #f87171;
-    border: none;
-    color: #ffffff;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-  }
-  
-  .dark-mode .btn-info:hover {
-    background: #fb923c;
-    transform: scale(1.05);
-  }
+  background: linear-gradient(90deg, #ff6b6b, #feca57); /* Match LandingPage gradient */
+  border: none;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px; /* Match LandingPage rounded buttons */
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #feca57, #ff6b6b); /* Reverse gradient on hover */
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.5); /* Match LandingPage glow */
+}
+
+/* Style buttons (e.g., "View Transactions") */
+.btn-info {
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  color: #ffffff;
+}
+
+/* Dark Mode */
+.dark-mode .btn-info {
+  background: #ff6b6b; /* Match LandingPage primary color */
+}
+
+.dark-mode .btn-info:hover {
+  background: #feca57; /* Match LandingPage secondary color */
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+}
+
+/* Light Mode */
+.light-mode .btn-info {
+  background: #ff8787; /* Slightly lighter for light mode */
+}
+
+.light-mode .btn-info:hover {
+  background: #ffd07b; /* Match LandingPage light mode secondary color */
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+}
