@@ -18,6 +18,11 @@ const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleS
             {/* Sidebar */}
             {isAuthenticated && (
                 <div className={`sidebar ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+                    {/* Sidebar Header with "Navigation Bar" Text */}
+                    <div className="sidebar-header">
+                        <h2 className="sidebar-title">Navigation Bar</h2>
+                    </div>
+
                     {/* Hamburger Menu Button Integrated with Sidebar */}
                     <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
                         <FaBars />

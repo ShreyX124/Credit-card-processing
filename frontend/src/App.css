@@ -144,6 +144,32 @@ body {
   color: #1e293b !important;
 }
 
+/* Sidebar Header Styles */
+.sidebar-header {
+  padding: 1rem 0.5rem;
+  text-align: center;
+  display: none; /* Hidden in collapsed state */
+}
+
+/* Show header when sidebar is expanded */
+.sidebar.sidebar-open .sidebar-header,
+.sidebar:hover .sidebar-header {
+  display: block; /* Show header when expanded */
+}
+
+.sidebar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: #e2e8f0; /* Default color matches sidebar text in dark mode */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Light Mode Styles for Sidebar Header */
+.light-mode .sidebar-title {
+  color: #0f172a; /* Dark text in light mode */
+}
+
 /* Main Content Styles */
 .main-content {
   flex: 1;
