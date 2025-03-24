@@ -11,7 +11,7 @@
   overflow-y: auto;
   transition: width 0.3s ease;
   z-index: 1000;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Match LandingPage shadow */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Expanded state */
@@ -22,7 +22,7 @@
 
 /* Sidebar Toggle Button */
 .sidebar-toggle-btn {
-  background: linear-gradient(90deg, #ff6b6b, #feca57); /* Match LandingPage gradient */
+  background: linear-gradient(90deg, #ff6b6b, #feca57);
   border: none;
   color: #ffffff;
   font-size: 1.5rem;
@@ -31,7 +31,7 @@
   position: absolute;
   top: 1rem;
   right: 0;
-  border-radius: 0 15px 15px 0; /* Match LandingPage rounded corners */
+  border-radius: 0 15px 15px 0;
   width: 40px;
   height: 40px;
   display: flex;
@@ -41,13 +41,13 @@
 }
 
 .light-mode .sidebar-toggle-btn {
-  background: linear-gradient(90deg, #ff8787, #ffd07b); /* Match LandingPage light mode gradient */
+  background: linear-gradient(90deg, #ff8787, #ffd07b);
   color: #ffffff;
 }
 
 .sidebar-toggle-btn:hover {
-  background: linear-gradient(90deg, #feca57, #ff6b6b); /* Reverse gradient on hover */
-  box-shadow: 0 0 15px rgba(255, 107, 107, 0.5); /* Match LandingPage glow */
+  background: linear-gradient(90deg, #feca57, #ff6b6b);
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
 }
 
 .light-mode .sidebar-toggle-btn:hover {
@@ -64,7 +64,7 @@
 .sidebar .nav-link {
   color: #e2e8f0 !important;
   padding: 0.75rem 1rem;
-  border-radius: 15px; /* Match LandingPage rounded corners */
+  border-radius: 15px;
   font-size: 1rem;
   display: flex;
   align-items: center;
@@ -76,7 +76,7 @@
 .sidebar .nav-link:hover {
   background: #374151;
   color: #ffffff !important;
-  box-shadow: 0 0 10px rgba(255, 107, 107, 0.3); /* Subtle glow */
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
 }
 
 .sidebar.sidebar-open .nav-link,
@@ -86,12 +86,12 @@
 
 /* Highlight Active Link */
 .sidebar .nav-link.active {
-  background: #ff6b6b; /* Match LandingPage primary color */
+  background: #ff6b6b;
   color: #ffffff !important;
 }
 
 .light-mode .sidebar .nav-link.active {
-  background: #ff8787; /* Match LandingPage light mode primary color */
+  background: #ff8787;
   color: #ffffff !important;
 }
 
@@ -159,13 +159,14 @@
 /* Navbar Styles */
 .navbar {
   padding: 1rem;
-  border-radius: 15px; /* Match LandingPage rounded corners */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Match LandingPage shadow */
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: 600;
+/* Adjust navbar layout to center the theme toggle */
+.navbar .container {
+  display: flex;
+  justify-content: flex-end; /* Push content to the right */
 }
 
 .navbar-nav .nav-link {
@@ -178,14 +179,6 @@
 .dark-mode .navbar {
   background: #1e293b;
   border-bottom: 1px solid #374151;
-}
-
-.dark-mode .navbar-brand {
-  color: #e2e8f0 !important;
-}
-
-.dark-mode .navbar-brand:hover {
-  color: #ffffff !important;
 }
 
 .dark-mode .navbar-nav .nav-link {
@@ -207,14 +200,6 @@
 .light-mode .navbar {
   background: #f1f5f9;
   border-bottom: 1px solid #d1d5db;
-}
-
-.light-mode .navbar-brand {
-  color: #0f172a !important;
-}
-
-.light-mode .navbar-brand:hover {
-  color: #1e293b !important;
 }
 
 .light-mode .navbar-nav .nav-link {
@@ -277,7 +262,7 @@
 }
 
 input:checked + .slider {
-  background: #ff6b6b; /* Match LandingPage primary color */
+  background: #ff6b6b;
 }
 
 input:checked + .slider:before {
