@@ -1,0 +1,125 @@
+/* frontend/src/styles/GlobalStyles.css */
+
+/* Reset some default styles and apply global styles */
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    transition: all 0.3s ease;
+  }
+  
+  /* App Wrapper */
+  .app-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack navbar and main content vertically */
+    min-height: 100vh;
+  }
+  
+  /* Main Content Styles */
+  .main-content {
+    flex: 1;
+    width: calc(100% - 80px); /* Adjust width to account for collapsed sidebar */
+    margin-left: 80px; /* Default margin matches collapsed sidebar width */
+    transition: margin-left 0.3s ease, width 0.3s ease; /* Smooth transition for both margin-left and width */
+  }
+  
+  /* Adjust margin-left and width when sidebar is present and expanded */
+  .app-wrapper:has(.sidebar.sidebar-open) .main-content,
+  .app-wrapper:has(.sidebar:hover) .main-content {
+    margin-left: 350px; /* Matches expanded sidebar width */
+    width: calc(100% - 350px); /* Adjust width to account for expanded sidebar */
+  }
+  
+  /* No margin-left or width adjustment when sidebar is not present (unauthenticated pages) */
+  .app-wrapper:not(:has(.sidebar)) .main-content {
+    margin-left: 0;
+    width: 100%; /* Full width when no sidebar */
+  }
+  
+  /* Dark Mode Styles */
+  .dark-mode {
+    background: #000000 !important; /* Solid black background */
+    color: #e2e8f0 !important;
+  }
+  
+  .dark-mode .jumbotron {
+    background: #1e293b !important; /* Dark gray background to match cards */
+    color: #e2e8f0 !important;
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+  }
+  
+  .dark-mode .jumbotron .display-4 {
+    color: #ffffff !important;
+  }
+  
+  .dark-mode .jumbotron .lead {
+    color: #94a3b8 !important;
+  }
+  
+  .dark-mode .jumbotron p {
+    color: #94a3b8 !important;
+  }
+  
+  .dark-mode .jumbotron hr {
+    border-color: #4b5563;
+  }
+  
+  .dark-mode h1,
+  .dark-mode h2,
+  .dark-mode h3,
+  .dark-mode h4,
+  .dark-mode h5,
+  .dark-mode h6 {
+    color: #ffffff !important;
+  }
+  
+  /* Light Mode Styles */
+  .light-mode {
+    background: linear-gradient(135deg, #e2e8f0, #f1f5f9) !important; /* Softer grayish-blue to off-white gradient */
+    color: #0f172a !important;
+  }
+  
+  .light-mode .jumbotron {
+    background: #ffffff !important; /* White background for light mode */
+    color: #0f172a !important;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+  }
+  
+  .light-mode .jumbotron .display-4 {
+    color: #1e293b !important;
+  }
+  
+  .light-mode .jumbotron .lead {
+    color: #475569 !important;
+  }
+  
+  .light-mode .jumbotron p {
+    color: #475569 !important;
+  }
+  
+  .light-mode .jumbotron hr {
+    border-color: #d1d5db;
+  }
+  
+  .light-mode h1,
+  .light-mode h2,
+  .light-mode h3,
+  .light-mode h4,
+  .light-mode h5,
+  .light-mode h6 {
+    color: #1e293b !important;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

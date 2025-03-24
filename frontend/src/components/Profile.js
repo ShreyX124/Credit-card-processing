@@ -1,6 +1,10 @@
+// src/components/Profile.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import API_BASE_URL from '../config'; // Add this import
+import API_BASE_URL from '../config';
+import '../styles/CardStyles.css'; // Import card styles
+import '../styles/ProfileStyles.css'; // Import profile styles
+import '../styles/TextStyles.css'; // Import text styles
 
 const Profile = () => {
     const [userData, setUserData] = useState(null);
@@ -22,7 +26,7 @@ const Profile = () => {
                 });
                 console.log('API Response:', response.data);
                 setUserData(response.data.user);
-                setTransactions(response.data.transactions || []); // Ensure transactions is an array
+                setTransactions(response.data.transactions || []);
             } catch (error) {
                 console.error('Error fetching profile:', error);
                 setError(error.message || 'Failed to fetch profile data');

@@ -1,6 +1,8 @@
+// frontend/src/components/Navbar.js
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaBars, FaTachometerAlt, FaCreditCard, FaHistory, FaUser, FaSignOutAlt } from 'react-icons/fa';
+import '../styles/NavbarStyles.css'; // Import the navbar styles
 
 const Navbar = ({ isAuthenticated, userType, logout, theme, toggleTheme, toggleSidebar, isSidebarOpen, setIsSidebarOpen }) => {
     const location = useLocation(); // Get the current route

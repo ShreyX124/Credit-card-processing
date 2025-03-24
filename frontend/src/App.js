@@ -1,7 +1,8 @@
+// frontend/src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './styles/GlobalStyles.css'; // Import the global styles
 import Login from './components/Login';
 import CustomerDashboard from './components/CustomerDashboard';
 import MerchantDashboard from './components/MerchantDashboard';

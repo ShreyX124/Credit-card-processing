@@ -1,0 +1,49 @@
+/* frontend/src/styles/ButtonStyles.css */
+
+/* Style buttons */
+.btn-primary {
+    background: linear-gradient(90deg, #f87171, #fb923c);
+    border: none;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(90deg, #fb923c, #f87171);
+    transform: scale(1.05);
+  }
+  
+  /* Style buttons in light mode (e.g., "View Transactions") */
+  .light-mode .btn-info {
+    background: #f97316;
+    border: none;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .light-mode .btn-info:hover {
+    background: #ef4444;
+    transform: scale(1.05);
+  }
+  
+  /* Style buttons in dark mode (e.g., "View Transactions") */
+  .dark-mode .btn-info {
+    background: #f87171;
+    border: none;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .dark-mode .btn-info:hover {
+    background: #fb923c;
+    transform: scale(1.05);
+  }

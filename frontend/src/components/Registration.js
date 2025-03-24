@@ -1,7 +1,11 @@
 // src/components/Registration.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import API_BASE_URL from '../config'; // This should now resolve correctly
+import API_BASE_URL from '../config';
+import '../styles/CardStyles.css'; // Import card styles
+import '../styles/FormStyles.css'; // Import form styles
+import '../styles/ButtonStyles.css'; // Import button styles
+import '../styles/TextStyles.css'; // Import text styles
 
 function Registration({ login }) {
     const [username, setUsername] = useState('');

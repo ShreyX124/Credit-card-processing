@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import API_BASE_URL from '../config'; // Add this import
+import '../styles/CardStyles.css'; // Import card styles
+import '../styles/ButtonStyles.css'; // Import button styles
+import '../styles/TextStyles.css'; // Import text styles
 
 const MerchantDashboard = () => {
   const [stats, setStats] = useState({
